@@ -10,10 +10,10 @@ import readee
 import argparse
 
 parser = argparse.ArgumentParser()
+parser.add_argument('-ebook_convert_app')
 args = parser.parse_args()
-print(args)
-if args.get('ebook_convert_app'):
-	ebook_convert_app = args.get('ebook_convert_app')
+if args.ebook_convert_app:
+	ebook_convert_app = args.ebook_convert_app
 elif os.name == 'posix':
 	ebook_convert_app = '/Applications/calibre.app/Contents/MacOS/ebook-convert'
 else:
@@ -21,6 +21,19 @@ else:
 
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
+
+def getArticleHtml(name, link, soup):
+	if soup.name == '[document]':
+		soup = soup.find('div', {'property': 'articleBody'})
+	return '''
+<html>
+	<body>
+		<title>%s</title>
+		%s
+		<div><br/><a href="%s">原文</a></div>
+	</body>
+</html>
+	''' % (name, str(soup), link)
 
 def gen():
 	source_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'source.yaml')
@@ -68,10 +81,10 @@ def gen():
 
 	for name, link in links.items():
 		with open('html_result/%s.html' % name, 'w') as f:
-			f.write(str(readee.export(link)))
+			f.write(getArticleHtml(name, link, readee.export(link)))
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
-	pdf_name = 'html_result/今日新闻%s.pdf' % today
-	os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
+	pdf_name = 'pdf_result/今日新闻%s.pdf' % today
+	# os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
 		
 
