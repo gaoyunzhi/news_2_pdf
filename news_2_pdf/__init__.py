@@ -42,12 +42,12 @@ def getArticleHtml(name, link, soup, index_html):
 </html>
 	''' % (name, name, index_html, str(soup), link, index_html)
 
-def gen():
+def gen(news_source='bbc'):
 	source_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'source.yaml')
 	with open(source_filename) as f:
 		source = yaml.load(f, Loader=yaml.FullLoader)
 
-	soup = BeautifulSoup(cached_url.get(source['bbc']), 'html.parser')
+	soup = BeautifulSoup(cached_url.get(source[news_source]), 'html.parser')
 	links = {}
 	for item in soup.find_all('a', class_='title-link'):
 		if not item.text or not item.text.strip():
@@ -89,7 +89,7 @@ def gen():
 
 	for name, link in links.items():
 		with open('html_result/%s.html' % name, 'w') as f:
-			f.write(getArticleHtml(name, link, readee.export(link), index_html_name))
+			f.write(getArticleHtml(name, link, readee.export(link), '今日新闻%s.html' % today))
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/今日新闻%s.pdf' % today
