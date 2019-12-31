@@ -5,12 +5,14 @@ import cached_url
 import os
 import datetime
 import sys
+from datetime import date
 
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
 
 def gen():
-	with open(os.path.join(sys.path[0], 'source.yaml')) as f:
+	source_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'source.yaml')
+	with open(source_filename) as f:
 		source = yaml.load(f, Loader=yaml.FullLoader)
 
 	soup = BeautifulSoup(cached_url.get(source['bbc']), 'html.parser')
@@ -48,6 +50,8 @@ def gen():
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/>', 'html.parser'))
 
-	with open('result_html/今日新闻.html', 'w') as f:
+	today = date.today().strftime("%y%m%d")
+	os.system('mkdir result_html > /dev/null 2>&1')
+	with open('result_html/今日新闻%s.html' % today, 'w') as f:
 		f.write(str(soup))
 
