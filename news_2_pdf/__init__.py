@@ -21,13 +21,18 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
+	
+	for name, link in links.items()[:]:
+		html = getArticleHtml(name, link, filename + '.html')
+		if html:
+			with open('html_result/%s.html' % name, 'w') as f:
+				f.write(html)
+		else:
+			del links[name]
+
 	index_html_name = 'html_result/%s.html' % filename
 	with open(index_html_name, 'w') as f:
 		f.write(getIndexHtml(news_source, links))
-
-	for name, link in links.items():
-		with open('html_result/%s.html' % name, 'w') as f:
-			f.write(getArticleHtml(name, link, filename + '.html'))
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/%s.pdf' % filename

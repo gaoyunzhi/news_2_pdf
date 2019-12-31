@@ -28,6 +28,7 @@ def findLinks(news_source='bbc'):
 	links = {}
 	domain = getDomain(news_source)
 
+	link_set = set()
 	for item in getItems(soup, news_source):
 		if not item.text or not item.text.strip():
 			continue
@@ -41,4 +42,8 @@ def findLinks(news_source='bbc'):
 		links[name] = item['href'].strip()
 		if not '://' in links[name]:
 			links[name] =  domain +  links[name]
+		if link[name] in link_set:
+			del link[name]
+		else:
+			link_set.add(link[name])
 	return links
