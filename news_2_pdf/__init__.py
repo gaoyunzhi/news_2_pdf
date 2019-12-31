@@ -1,11 +1,9 @@
-from bs4 import BeautifulSoup
 import os
-import sys
-import readee
 import argparse
 from .find_links import findLinks
 from .article import getArticleHtml
 from .index import getIndexHtml
+from datetime import date
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-ebook_convert_app')
@@ -19,7 +17,7 @@ else:
 
 def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 	links = findLinks(news_source)
-	filename = '今日新闻%s%s' % (news_source, today)
+	filename = '今日新闻%s%s' % (news_source, date.today().strftime("%y%m%d"))
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')

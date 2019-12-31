@@ -1,4 +1,5 @@
 from datetime import date
+from bs4 import BeautifulSoup
 
 def getIndexHtml(news_source, links):
 	today = date.today().strftime("%y%m%d")
@@ -6,7 +7,7 @@ def getIndexHtml(news_source, links):
 	index_html = '''
 <html>
    <body>
-     <h1>今日新闻 %s, %s</h1>
+     <h1>今日新闻 %s %s</h1>
      <p style="text-indent:0pt">
      </p>
    </body>
@@ -19,4 +20,4 @@ def getIndexHtml(news_source, links):
 		item = '<a href="%s.html">%s</a>' % (name, name)
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
-	return soup
+	return str(soup)
