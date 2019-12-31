@@ -85,6 +85,6 @@ def gen():
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/今日新闻%s.pdf' % today
-	# os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
+	os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
 		
 
