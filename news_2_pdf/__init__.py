@@ -35,8 +35,7 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/%s.pdf' % filename
-	os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
-	os.system('open %s -g' % pdf_name)
+	os.system('%s %s %s > /dev/null 2>&1' % (ebook_convert_app, index_html_name, pdf_name))
 	return pdf_name
 		
 
