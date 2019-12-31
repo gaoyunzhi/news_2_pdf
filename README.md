@@ -1,22 +1,15 @@
 # readee
 
-Library for export webpage to reader mode html.
+Generate international news in pdf. For people with limited access to internet.
 
 ## usage
 
 ```
-import readee
-beautiful_soup_html = readee.export(url = webpage_url)
+import news_2_pdf
+new_2_pdg.gen()
 ```
-
-optional args:
-- content: raw webpage, will skip url fetching
-- list_replace: will replace list, usually for telegraph export
-- preserve_link: keep links
-- include_title: keep title
-- move_head_photo: try move head photo to top
-
 
 ## how to install
 
-`pip3 install readee`
+`sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin` 
+`pip3 install news_2_pdf`

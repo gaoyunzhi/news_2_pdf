@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="readee",
-    version="0.0.13",
+    version="0.0.1",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
-    description="Library for export webpage to reader mode html.",
+    description="Generate international news in pdf.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/gaoyunzhi/readee",
@@ -20,8 +20,9 @@ setuptools.setup(
     ],
     install_requires=[
         'bs4',
-        'readability-lxml',
-        'telegram_util>=0.0.20'
+        'telegram_util>=0.0.27',
+        'cached_url>=0.0.1',
+        'pyyaml',
     ],
     python_requires='>=3.0',
 )
