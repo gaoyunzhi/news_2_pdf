@@ -21,9 +21,10 @@ def getDomain(news_source):
 	return 'https://cn.nytimes.com'
 
 def findLinks(news_source='bbc'):
-	source_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'source.yaml')
-	with open(source_filename) as f:
-		source = yaml.load(f, Loader=yaml.FullLoader)
+	source = {
+		'bbc': 'https://www.bbc.com/zhongwen/simp',
+		'nyt': 'https://cn.nytimes.com/'
+	}
 	soup = BeautifulSoup(cached_url.get(source[news_source]), 'html.parser')
 	links = {}
 	domain = getDomain(news_source)
