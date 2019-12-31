@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+name = 'news_2_pdf'
+
 import os
 import argparse
 from .find_links import findLinks
