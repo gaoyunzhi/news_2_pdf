@@ -7,7 +7,6 @@ def fact():
 def getArticleHtml(name, link, index_loc):
 	soup = readee.export(link)
 	if soup.name == '[document]':
-		print(link)
 		if 'bbc' in link:
 			soup = soup.find('div', {'property': 'articleBody'})
 		else:
