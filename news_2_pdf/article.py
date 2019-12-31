@@ -5,6 +5,7 @@ def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
 
 def getArticleHtml(name, link, index_loc):
+	print(link)
 	soup = readee.export(link)
 	if soup.name == '[document]':
 		soup = soup.find('div', {'property': 'articleBody'})
