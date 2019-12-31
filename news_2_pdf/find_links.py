@@ -5,8 +5,8 @@ from telegram_util import matchKey
 import cached_url
 
 def getItems(soup, news_source):
-	if news_source == 'bbc':
-		return soup.find_all('a', class_='title-link')
+	for x in soup.find_all('a', class_='title-link'):
+		yield x
 	for x in soup.find_all():
 		if not x.attrs:
 			continue
@@ -27,7 +27,6 @@ def findLinks(news_source='bbc'):
 	soup = BeautifulSoup(cached_url.get(source[news_source]), 'html.parser')
 	links = {}
 	domain = getDomain(news_source)
-
 	link_set = set()
 	for item in getItems(soup, news_source):
 		if not item.text or not item.text.strip():
@@ -42,8 +41,8 @@ def findLinks(news_source='bbc'):
 		links[name] = item['href'].strip()
 		if not '://' in links[name]:
 			links[name] =  domain +  links[name]
-		if link[name] in link_set:
-			del link[name]
+		if links[name] in link_set:
+			del links[name]
 		else:
-			link_set.add(link[name])
+			link_set.add(links[name])
 	return links

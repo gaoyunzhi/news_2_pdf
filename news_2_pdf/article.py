@@ -6,10 +6,12 @@ def fact():
 
 def getArticleHtml(name, link, index_loc):
 	soup = readee.export(link)
-	if not soup:
-		return
 	if soup.name == '[document]':
-		soup = soup.find('div', {'property': 'articleBody'})
+		print(link)
+		if 'bbc' in link:
+			soup = soup.find('div', {'property': 'articleBody'})
+		else:
+			return
 	for item in soup.find_all('h2'):
 		new_item = fact().new_tag('h4')
 		new_item.string = item.text

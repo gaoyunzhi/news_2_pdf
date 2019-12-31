@@ -21,8 +21,8 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
-	
-	for name, link in links.items()[:]:
+
+	for name, link in links.copy().items():
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
 			with open('html_result/%s.html' % name, 'w') as f:
