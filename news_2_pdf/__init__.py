@@ -7,6 +7,17 @@ import datetime
 import sys
 from datetime import date
 import readee
+import argparse
+
+parser = argparse.ArgumentParser()
+args = parser.parse_args()
+print(args)
+if args.get('ebook_convert_app'):
+	ebook_convert_app = args.get('ebook_convert_app')
+elif os.name == 'posix':
+	ebook_convert_app = '/Applications/calibre.app/Contents/MacOS/ebook-convert'
+else:
+	ebook_convert_app = 'ebook-convert'
 
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
@@ -51,11 +62,16 @@ def gen():
 	today = date.today().strftime("%y%m%d")
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
-	with open('html_result/今日新闻%s.html' % today, 'w') as f:
+	index_html_name = 'html_result/今日新闻%s.html' % today
+	with open(index_html_name, 'w') as f:
 		f.write(str(soup))
 
 	for name, link in links.items():
 		with open('html_result/%s.html' % name, 'w') as f:
 			f.write(str(readee.export(link)))
+
+	os.system('mkdir pdf_result > /dev/null 2>&1')
+	pdf_name = 'html_result/今日新闻%s.pdf' % today
+	os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
 		
 
