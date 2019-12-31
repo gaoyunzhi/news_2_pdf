@@ -48,7 +48,7 @@ def gen():
 		content_list.append(BeautifulSoup('<br/>', 'html.parser'))
 
 	today = date.today().strftime("%y%m%d")
-	os.system('rm html_result')	
+	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
 	with open('html_result/今日新闻%s.html' % today, 'w') as f:
 		f.write(str(soup))
