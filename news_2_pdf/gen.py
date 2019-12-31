@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from telegram_util import matchKey
 import cached_url
 import os
+import datetime
 
 with open('source.yaml') as f:
 	source = yaml.load(f, Loader=yaml.FullLoader)
@@ -22,4 +23,18 @@ for item in soup.find_all('a', class_='title-link'):
 	links[name] = item['href'].strip()
 	if not '://' in links[name]:
 		links[name] = 'https://www.bbc.co.uk' +  links[name]
-	
+
+os.system('rm html_result')	
+os.system('mkdir html_result > /dev/null 2>&1')
+
+index_html = '''
+<html>
+   <body>
+     <h1>Table of Contents</h1>
+     <p style="text-indent:0pt">
+     </p>
+   </body>
+</html>
+'''
+soup = BeautifulSoup(index_html, 'html.parser')
+content_list = soup.find('p')
