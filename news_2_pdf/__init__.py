@@ -31,9 +31,6 @@ def gen():
 		if not '://' in links[name]:
 			links[name] = 'https://www.bbc.co.uk' +  links[name]
 
-	os.system('rm html_result')	
-	os.system('mkdir html_result > /dev/null 2>&1')
-
 	index_html = '''
 	<html>
 	   <body>
@@ -51,7 +48,8 @@ def gen():
 		content_list.append(BeautifulSoup('<br/>', 'html.parser'))
 
 	today = date.today().strftime("%y%m%d")
-	os.system('mkdir result_html > /dev/null 2>&1')
-	with open('result_html/今日新闻%s.html' % today, 'w') as f:
+	os.system('rm html_result')	
+	os.system('mkdir html_result > /dev/null 2>&1')
+	with open('html_result/今日新闻%s.html' % today, 'w') as f:
 		f.write(str(soup))
 
