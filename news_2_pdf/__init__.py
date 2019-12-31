@@ -25,15 +25,20 @@ def fact():
 def getArticleHtml(name, link, soup):
 	if soup.name == '[document]':
 		soup = soup.find('div', {'property': 'articleBody'})
+	for item in soup.find_all('h2'):
+		new_item = fact().new_tag('h4')
+		new_item.string = item.text
+		item.replace_with(new_item)
 	return '''
 <html>
 	<body>
 		<title>%s</title>
+		<h1>%s</h1>
 		%s
 		<div><br/><a href="%s">原文</a></div>
 	</body>
 </html>
-	''' % (name, str(soup), link)
+	''' % (name, name, str(soup), link)
 
 def gen():
 	source_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'source.yaml')
@@ -86,5 +91,6 @@ def gen():
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/今日新闻%s.pdf' % today
 	os.system('%s %s %s' % (ebook_convert_app, index_html_name, pdf_name))
+	os.system('open %s -g' % pdf_name)
 		
 
