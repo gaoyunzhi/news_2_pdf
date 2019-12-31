@@ -6,6 +6,7 @@ import os
 import datetime
 import sys
 from datetime import date
+import readee
 
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
@@ -52,4 +53,9 @@ def gen():
 	os.system('mkdir html_result > /dev/null 2>&1')
 	with open('html_result/今日新闻%s.html' % today, 'w') as f:
 		f.write(str(soup))
+
+	for name, link in links.items():
+		with open('html_result/%s.html' % name, 'w') as f:
+			f.write(str(readee.export(link)))
+		
 
