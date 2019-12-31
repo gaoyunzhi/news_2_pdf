@@ -1,4 +1,4 @@
-# readee
+# news_2_pdf
 
 Generate international news in pdf. For people with limited access to internet.
 

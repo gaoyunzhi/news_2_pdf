@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="readee",
+    name="news_2_pdf",
     version="0.0.1",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
     description="Generate international news in pdf.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/gaoyunzhi/readee",
+    url="https://github.com/gaoyunzhi/news_2_pdf",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

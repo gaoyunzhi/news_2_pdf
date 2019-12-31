@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: readee
+Version: 0.0.1
+Summary: Generate international news in pdf.
+Home-page: https://github.com/gaoyunzhi/readee
+Author: Yunzhi Gao
+Author-email: gaoyunzhi@gmail.com
+License: UNKNOWN
+Description: # readee
+        
+        Generate international news in pdf. For people with limited access to internet.
+        
+        ## usage
+        
+        ```
+        import news_2_pdf
+        new_2_pdg.gen()
+        ```
+        
+        ## how to install
+        
+        `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin` 
+        `pip3 install news_2_pdf`
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.0
+Description-Content-Type: text/markdown

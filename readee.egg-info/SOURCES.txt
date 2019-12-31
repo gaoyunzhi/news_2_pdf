@@ -1,0 +1,8 @@
+README.md
+setup.py
+news_2_pdf/__init__.py
+readee.egg-info/PKG-INFO
+readee.egg-info/SOURCES.txt
+readee.egg-info/dependency_links.txt
+readee.egg-info/requires.txt
+readee.egg-info/top_level.txt
