@@ -6,7 +6,7 @@ import os
 import sys
 
 def test():
-	# news_2_pdf.gen(news_source='bbc')
-	news_2_pdf.gen(news_source='nyt')
+	news_2_pdf.gen(news_source='bbc')
+	# news_2_pdf.gen(news_source='nyt')
 	
 test()

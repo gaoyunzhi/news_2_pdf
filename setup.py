@@ -23,7 +23,7 @@ setuptools.setup(
         'telegram_util>=0.0.27',
         'cached_url>=0.0.1',
         'pyyaml',
-        'readee>=0.0.13'
+        'readee>=0.0.14'
     ],
     python_requires='>=3.0',
 )
