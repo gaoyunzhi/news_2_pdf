@@ -22,7 +22,7 @@ else:
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
 
-def getArticleHtml(name, link, soup):
+def getArticleHtml(name, link, soup, index_html):
 	if soup.name == '[document]':
 		soup = soup.find('div', {'property': 'articleBody'})
 	for item in soup.find_all('h2'):
@@ -34,11 +34,13 @@ def getArticleHtml(name, link, soup):
 	<body>
 		<title>%s</title>
 		<h1>%s</h1>
+		<div><a href="%s">返回目录</a></div>
 		%s
 		<div><br/><a href="%s">原文</a></div>
+		<div><br/><a href="%s">返回目录</a></div>
 	</body>
 </html>
-	''' % (name, name, str(soup), link)
+	''' % (name, name, index_html, str(soup), link, index_html)
 
 def gen():
 	source_filename = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'source.yaml')
@@ -61,23 +63,24 @@ def gen():
 		if not '://' in links[name]:
 			links[name] = 'https://www.bbc.co.uk' +  links[name]
 
+	today = date.today().strftime("%y%m%d")
+
 	index_html = '''
-	<html>
-	   <body>
-	     <h1>Table of Contents</h1>
-	     <p style="text-indent:0pt">
-	     </p>
-	   </body>
-	</html>
-	'''
+<html>
+   <body>
+     <h1>今日新闻 %s</h1>
+     <p style="text-indent:0pt">
+     </p>
+   </body>
+</html>
+	''' % today
 	soup = BeautifulSoup(index_html, 'html.parser')
 	content_list = soup.find('p')
 	for name in links:
 		item = '<a href="%s.html">%s</a>' % (name, name)
 		content_list.append(BeautifulSoup(item, 'html.parser'))
-		content_list.append(BeautifulSoup('<br/>', 'html.parser'))
+		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
 
-	today = date.today().strftime("%y%m%d")
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
 	index_html_name = 'html_result/今日新闻%s.html' % today
@@ -86,7 +89,7 @@ def gen():
 
 	for name, link in links.items():
 		with open('html_result/%s.html' % name, 'w') as f:
-			f.write(getArticleHtml(name, link, readee.export(link)))
+			f.write(getArticleHtml(name, link, readee.export(link), index_html_name))
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/今日新闻%s.pdf' % today
