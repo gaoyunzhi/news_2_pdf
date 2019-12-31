@@ -4,12 +4,13 @@ from telegram_util import matchKey
 import cached_url
 import os
 import datetime
+import sys
 
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
 
 def gen():
-	with open('source.yaml') as f:
+	with open(os.path.join(sys.path[0], 'source.yaml')) as f:
 		source = yaml.load(f, Loader=yaml.FullLoader)
 
 	soup = BeautifulSoup(cached_url.get(source['bbc']), 'html.parser')
