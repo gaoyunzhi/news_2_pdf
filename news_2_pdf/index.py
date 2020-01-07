@@ -8,7 +8,14 @@ def getIndexHtml(news_source, links):
 <html>
    <body>
      <h1>今日新闻 %s %s</h1>
+     <br/>
      <p style="text-indent:0pt">
+     </p>
+     <br/>
+     <br/>
+     <p style="text-indent:0pt">
+     	来源：
+     	<a href="https://t.me/news_pdf">新闻播报</a>
      </p>
    </body>
 </html>
