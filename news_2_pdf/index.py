@@ -2,7 +2,7 @@ from datetime import date
 from bs4 import BeautifulSoup
 
 def getIndexHtml(news_source, links):
-	today = date.today().strftime("%y%m%d")
+	today = date.today().strftime("%m%d")
 
 	index_html = '''
 <html>

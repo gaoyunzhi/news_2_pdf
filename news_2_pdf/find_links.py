@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import yaml
 from telegram_util import matchKey
 import cached_url
+from datetime import date
 
 SOURCE = {
 	'bbc': 'https://www.bbc.com/zhongwen/simp',
@@ -28,9 +29,21 @@ def getItems(soup, news_source):
 			continue
 		for y in x.find_all('a'):
 			yield y
+	year = '/' + date.today().strftime("%Y") + '/'
+	for x in soup.find_all('a'):
+		if x['href'].startswith(year) and x['href'].endswith('html'):
+			yield x
 
 def getDomain(news_source):
 	return DOMAIN[news_source]
+
+def findName(item):
+	if not item.text or not item.text.strip():
+		return
+	p = item.find('p')
+	if p and p.text and p.text.strip():
+		return p.text.strip()
+	return item.text.strip()
 
 def findLinks(news_source='bbc'):
 	soup = BeautifulSoup(cached_url.get(SOURCE[news_source]), 'html.parser')
@@ -38,10 +51,10 @@ def findLinks(news_source='bbc'):
 	domain = getDomain(news_source)
 	link_set = set()
 	for item in getItems(soup, news_source):
-		if not item.text or not item.text.strip():
+		name = findName(item)
+		if not name:
 			continue
-		name = item.text.strip()
-		if matchKey(name, ['\n', '视频']):
+		if matchKey(name, ['\n', '视频', 'podcasts']):
 			continue
 		if len(name) < 5: # 导航栏目
 			continue
