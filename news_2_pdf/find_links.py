@@ -4,6 +4,20 @@ import yaml
 from telegram_util import matchKey
 import cached_url
 
+SOURCE = {
+	'bbc': 'https://www.bbc.com/zhongwen/simp',
+	'nyt': 'https://cn.nytimes.com',
+	'bbc英文': 'https://www.bbc.co.uk',
+	'nyt英文': 'https://www.nytimes.com',
+}
+
+DOMAIN = {
+	'bbc': 'https://www.bbc.co.uk',
+	'nyt': 'https://cn.nytimes.com',
+	'bbc英文': 'https://www.bbc.co.uk',
+	'nyt英文': 'https://www.nytimes.com',
+}
+
 def getItems(soup, news_source):
 	for x in soup.find_all('a', class_='title-link'):
 		yield x
@@ -16,16 +30,10 @@ def getItems(soup, news_source):
 			yield y
 
 def getDomain(news_source):
-	if news_source == 'bbc':
-		return 'https://www.bbc.co.uk'
-	return 'https://cn.nytimes.com'
+	return DOMAIN[news_source]
 
 def findLinks(news_source='bbc'):
-	source = {
-		'bbc': 'https://www.bbc.com/zhongwen/simp',
-		'nyt': 'https://cn.nytimes.com/'
-	}
-	soup = BeautifulSoup(cached_url.get(source[news_source]), 'html.parser')
+	soup = BeautifulSoup(cached_url.get(SOURCE[news_source]), 'html.parser')
 	links = {}
 	domain = getDomain(news_source)
 	link_set = set()

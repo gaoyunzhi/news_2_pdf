@@ -16,7 +16,7 @@ else:
 
 def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 	links = findLinks(news_source)
-	filename = '今日新闻%s%s' % (news_source, date.today().strftime("%y%m%d"))
+	filename = '%s%s' % (news_source, date.today().strftime("%y%m%d"))
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
