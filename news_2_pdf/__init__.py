@@ -6,7 +6,7 @@ name = 'news_2_pdf'
 import os
 from .find_links import findLinks
 from .article import getArticleHtml
-from .index import getIndexHtml
+from .index import getIndexHtml, cleanName
 from datetime import date
 
 if os.name == 'posix':
@@ -24,7 +24,7 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 	for name, link in links.copy().items():
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
-			with open('html_result/%s.html' % name, 'w') as f:
+			with open('html_result/%s.html' % cleanName(name), 'w') as f:
 				f.write(html)
 		else:
 			del links[name]
