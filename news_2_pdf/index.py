@@ -19,7 +19,7 @@ def getIndexHtml(news_source, links):
      </p>
    </body>
 </html>
-	''' % (news_source, today)
+	''' % (news_source.upper(), today)
 
 	soup = BeautifulSoup(index_html, 'html.parser')
 	content_list = soup.find('p')
