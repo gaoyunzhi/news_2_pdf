@@ -22,6 +22,8 @@ DOMAIN = {
 def getItems(soup, news_source):
 	for x in soup.find_all('a', class_='title-link'):
 		yield x
+	for x in soup.find_all('a', class_='top-story'):
+		yield x
 	for x in soup.find_all():
 		if not x.attrs:
 			continue
