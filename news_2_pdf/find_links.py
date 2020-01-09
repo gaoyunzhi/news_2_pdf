@@ -40,9 +40,10 @@ def getDomain(news_source):
 def findName(item):
 	if not item.text or not item.text.strip():
 		return
-	p = item.find('p')
-	if p and p.text and p.text.strip():
-		return p.text.strip()
+	for x in ['p', 'span']:
+		subitem = item.find(x)
+		if subitem and subitem.text and subitem.text.strip():
+			return subitem.text.strip()
 	return item.text.strip()
 
 def findLinks(news_source='bbc'):
@@ -54,7 +55,6 @@ def findLinks(news_source='bbc'):
 		name = findName(item)
 		if not name:
 			continue
-		print(name)
 		if matchKey(name, ['\n', '视频', 'podcasts']):
 			continue
 		if len(name) < 5: # 导航栏目
