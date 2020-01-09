@@ -31,7 +31,9 @@ def getItems(soup, news_source):
 			yield y
 	year = '/' + date.today().strftime("%Y") + '/'
 	for x in soup.find_all('a'):
-		if x['href'].startswith(year) and x['href'].endswith('html'):
+		link = x['href']
+		if link.startswith(year) and link.endswith('html') and \
+			not matchKey(link, ['podcast', 'briefing']):
 			yield x
 
 def getDomain(news_source):
