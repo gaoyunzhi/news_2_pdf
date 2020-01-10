@@ -9,6 +9,7 @@ def getArticleHtml(name, link, index_loc):
 	funcs = [
 		lambda x: x.find('div', {'property': 'articleBody'}),
 		lambda x: x.find('article'),
+		lambda x: x.find('div', {'id': 'story-body'}),
 	]
 	for f in funcs:
 		new_soup = f(soup)

@@ -59,7 +59,7 @@ def findLinks(news_source='bbc'):
 		name = findName(item)
 		if not name:
 			continue
-		if matchKey(name, ['\n', '视频', 'podcasts']):
+		if matchKey(name, ['\n', '视频', 'podcasts', 'Watch video', 'Watch:']):
 			continue
 		if len(name) < 5: # 导航栏目
 			continue
