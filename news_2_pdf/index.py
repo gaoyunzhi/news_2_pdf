@@ -1,8 +1,11 @@
 from datetime import date
 from bs4 import BeautifulSoup
 
+TO_CLEAN = '#/'
 def cleanName(name):
-    return name.replace('#', '')
+    for x in TO_CLEAN:
+        name = name.replace('#', '')
+    return name
 
 def getIndexHtml(news_source, links):
 	today = date.today().strftime("%m%d")
