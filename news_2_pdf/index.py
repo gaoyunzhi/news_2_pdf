@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 TO_CLEAN = '#/'
 def cleanName(name):
     for x in TO_CLEAN:
-        name = name.replace('#', '')
+        name = name.replace(x, '')
     return name
 
 def getIndexHtml(news_source, links):
