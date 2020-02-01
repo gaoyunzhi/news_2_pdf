@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="news_2_pdf",
-    version="0.0.15",
+    version="0.0.16",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
     description="Generate international news in pdf.",

@@ -6,8 +6,9 @@ name = 'news_2_pdf'
 import os
 from .find_links import findLinks
 from .article import getArticleHtml
-from .index import getIndexHtml, cleanName
+from .index import getIndexHtml
 from datetime import date
+from telegram_util import cleanFileName
 
 if os.name == 'posix':
 	ebook_convert_app = '/Applications/calibre.app/Contents/MacOS/ebook-convert'
@@ -24,7 +25,7 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 	for name, link in links.copy().items():
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
-			with open('html_result/%s.html' % cleanName(name), 'w') as f:
+			with open('html_result/%s.html' % cleanFileName(name), 'w') as f:
 				f.write(html)
 		else:
 			del links[name]

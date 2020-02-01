@@ -1,11 +1,6 @@
 from datetime import date
 from bs4 import BeautifulSoup
-
-TO_CLEAN = '#/?'
-def cleanName(name):
-    for x in TO_CLEAN:
-        name = name.replace(x, '')
-    return name
+from telegram_util import cleanFileName
 
 def getIndexHtml(news_source, links):
 	today = date.today().strftime("%m%d")
@@ -30,7 +25,8 @@ def getIndexHtml(news_source, links):
 	soup = BeautifulSoup(index_html, 'html.parser')
 	content_list = soup.find('p')
 	for name in links:
-		item = '<a href="%s.html">%s</a>' % (cleanName(name), cleanName(name))
+		item = '<a href="%s.html">%s</a>' % \
+            (cleanFileName(name), cleanFileName(name))
 		content_list.append(BeautifulSoup(item, 'html.parser'))
 		content_list.append(BeautifulSoup('<br/><br/>', 'html.parser'))
 	return str(soup)
