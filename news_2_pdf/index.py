@@ -1,7 +1,7 @@
 from datetime import date
 from bs4 import BeautifulSoup
 
-TO_CLEAN = '#/'
+TO_CLEAN = '#/?'
 def cleanName(name):
     for x in TO_CLEAN:
         name = name.replace(x, '')
