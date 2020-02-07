@@ -35,7 +35,7 @@ def getItems(soup, news_source):
 	for x in soup.find_all('a'):
 		link = x['href']
 		if link.startswith(year) and link.endswith('html') and \
-			not matchKey(link, ['podcast', 'briefing']):
+			not matchKey(link, ['podcast', 'briefing', 'topic']):
 			yield x
 
 def getDomain(news_source):
@@ -59,7 +59,7 @@ def findLinks(news_source='bbc'):
 		name = findName(item)
 		if not name:
 			continue
-		if matchKey(name, ['\n', '视频', '音频', 'podcasts', 'Watch video', 'Watch:']):
+		if matchKey(name, ['\n', '视频', '音频', 'podcasts', 'Watch video', 'Watch:', '专题']):
 			continue
 		if len(name) < 5: # 导航栏目
 			continue
