@@ -33,7 +33,7 @@ def getItems(soup, news_source):
 			yield y
 	year = '/' + date.today().strftime("%Y") + '/'
 	for x in soup.find_all('a'):
-		if 'href' not in x:
+		if 'href' not in x.attrs:
 			continue
 		link = x['href']
 		if link.startswith(year) and link.endswith('html') and \
