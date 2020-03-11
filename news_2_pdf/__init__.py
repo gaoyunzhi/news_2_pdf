@@ -16,19 +16,21 @@ else:
 	ebook_convert_app = 'ebook-convert'
 
 def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
-	links = findLinks(news_source)
 	filename = '%s_%s新闻' % (date.today().strftime("%m%d"), news_source.upper())
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
 
-	for name, link in links.copy().items():
+	links = []
+	for link, name in findLinks(news_source):
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
-			with open('html_result/%s.html' % cleanFileName(name), 'w') as f:
+			name = cleanFileName(name)
+			with open('html_result/%s.html' % name, 'w') as f:
 				f.write(html)
-		else:
-			del links[name]
+			links.append(name)
+			if len(links) > 10:
+				break
 
 	index_html_name = 'html_result/%s.html' % filename
 	with open(index_html_name, 'w') as f:
