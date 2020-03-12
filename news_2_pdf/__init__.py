@@ -15,8 +15,8 @@ if os.name == 'posix':
 else:
 	ebook_convert_app = 'ebook-convert'
 
-def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
-	filename = '%s_%s新闻' % (date.today().strftime("%m%d"), news_source.upper())
+def gen(news_source='bbc', ebook_convert_app=ebook_convert_app, additional_setting='', filename_suffix = ''):
+	filename = '%s_%s新闻' % (date.today().strftime("%m%d"), news_source.upper()) + filename_suffix
 
 	os.system('rm -rf html_result')	
 	os.system('mkdir html_result > /dev/null 2>&1')
@@ -38,10 +38,8 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app):
 
 	os.system('mkdir pdf_result > /dev/null 2>&1')
 	pdf_name = 'pdf_result/%s.pdf' % filename
-	command = '%s %s %s --paper-size b6 --pdf-page-margin-left 15 ' + \
-		'--pdf-page-margin-right 15 --pdf-page-margin-top 15 ' + \
-		'--pdf-page-margin-bottom 15 > /dev/null 2>&1'
-	os.system(command % (ebook_convert_app, index_html_name, pdf_name))
+	command = '%s %s %s %s > /dev/null 2>&1'
+	os.system(command % (ebook_convert_app, index_html_name, pdf_name, additional_setting))
 	return pdf_name
 		
 
