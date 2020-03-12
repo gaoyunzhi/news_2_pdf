@@ -7,8 +7,11 @@ import sys
 
 def test():
 	pdf_name = news_2_pdf.gen(news_source='bbc')
-	# pdf_name = news_2_pdf.gen(news_source='nyt英文')
 	os.system('open %s -g' % pdf_name)
+	pdf_name = news_2_pdf.gen(news_source='nyt英文')
+	pdf_name = news_2_pdf.gen(news_source='nyt')
+	pdf_name = news_2_pdf.gen(news_source='bbc英文')
+	
 	
 if __name__=='__main__':
 	test()
