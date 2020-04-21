@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import readee
 import time
+import cached_url
 
 def fact():
 	return BeautifulSoup("<div></div>", features="lxml")
