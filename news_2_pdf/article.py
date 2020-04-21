@@ -9,8 +9,7 @@ def fact():
 def getArticleHtml(name, link, index_loc):
 	content = None
 	if 'bbc' in link:
-		time.sleep(1)
-		content = cached_url.get(link, force_cache=True)
+		content = cached_url.get(link, force_cache=True, sleep = 5)
 	soup = readee.export(link, content = content)
 	funcs = [
 		lambda x: x.find('div', {'property': 'articleBody'}),
