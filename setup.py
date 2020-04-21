@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="news_2_pdf",
-    version="0.0.24",
+    version="0.0.26",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
     description="Generate international news in pdf.",
@@ -24,6 +24,7 @@ setuptools.setup(
         'pyyaml',
         'readee',
         'link_extractor',
+        'cached_url',
     ],
     python_requires='>=3.0',
 )
