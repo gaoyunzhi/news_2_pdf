@@ -20,10 +20,10 @@ setuptools.setup(
     ],
     install_requires=[
         'bs4',
-        'telegram_util>=0.0.27',
+        'telegram_util',
         'pyyaml',
-        'readee>=0.0.20',
-        'link_extractor>=0.0.2',
+        'readee',
+        'link_extractor',
     ],
     python_requires='>=3.0',
 )
