@@ -7,9 +7,5 @@ SOURCE = {
 	'nyt英文': 'https://www.nytimes.com',
 }
 
-DOMAIN = {
-	'bbc': 'https://www.bbc.co.uk',
-}
-
 def findLinks(news_source='bbc'):
-	return link_extractor.getLinks(SOURCE[news_source], DOMAIN.get(news_source))
+	return link_extractor.getLinks(SOURCE[news_source])
