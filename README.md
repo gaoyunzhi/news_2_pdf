@@ -6,7 +6,10 @@ Generate international news in pdf. For people with limited access to internet.
 
 ```
 import news_2_pdf
-new_2_pdg.gen()
+new_2_pdf.gen('bbc英文')
+new_2_pdf.gen('nyt英文')
+new_2_pdf.gen('bbc')
+new_2_pdf.gen('nyt')
 ```
 
 ## how to install
