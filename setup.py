@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="news_2_pdf",
-    version="0.0.29",
+    version="0.0.30",
     author="Yunzhi Gao",
     author_email="gaoyunzhi@gmail.com",
     description="Generate international news in pdf.",
@@ -23,6 +23,7 @@ setuptools.setup(
         'telegram_util',
         'pyyaml',
         'readee',
+        'export_to_telegraph',
         'link_extractor',
         'cached_url',
     ],

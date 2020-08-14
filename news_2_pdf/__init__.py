@@ -9,6 +9,7 @@ from .article import getArticleHtml
 from .index import getIndexHtml
 from datetime import date
 from telegram_util import cleanFileName
+import export_to_telegraph
 
 if os.name == 'posix':
 	ebook_convert_app = '/Applications/calibre.app/Contents/MacOS/ebook-convert'
@@ -22,7 +23,8 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app, additional_setti
 	os.system('mkdir html_result > /dev/null 2>&1')
 
 	links = []
-	for link, name in findLinks(news_source):
+	for link in findLinks(news_source):
+		name = export_to_telegraph.getTitle(link)
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
 			name = cleanFileName(name)
