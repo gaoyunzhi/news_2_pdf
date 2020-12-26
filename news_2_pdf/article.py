@@ -10,7 +10,10 @@ def getArticleHtml(name, link, index_loc):
 	content = None
 	if 'bbc' in link:
 		content = cached_url.get(link, force_cache=True, sleep = 5)
-	soup = readee.export(link, content = content)
+	args = {}
+	if 'twreporter.org/' in link:
+		args['toSimplified'] = True
+	soup = readee.export(link, content = content, **args)
 	funcs = [
 		lambda x: x.find('div', {'property': 'articleBody'}),
 		lambda x: x.find('article'),

@@ -23,9 +23,11 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app, additional_setti
 	os.system('mkdir html_result > /dev/null 2>&1')
 
 	links = []
-	print(findLinks(news_source))
 	for link in findLinks(news_source):
-		name = export_to_telegraph.getTitle(link)
+		args = {}
+		if 'twreporter.org/' in link:
+			args['toSimplified'] = True
+		name = export_to_telegraph.getTitle(link, **args)
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
 			fn = cleanFileName(name)
