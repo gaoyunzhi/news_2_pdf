@@ -11,6 +11,6 @@ def test(source):
 	
 	
 if __name__=='__main__':
-	# test('bbc英文')
-	test('nyt英文')
+	test('bbc英文')
+	# test('nyt英文')
 	# test('nyt')

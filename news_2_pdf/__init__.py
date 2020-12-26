@@ -23,14 +23,15 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app, additional_setti
 	os.system('mkdir html_result > /dev/null 2>&1')
 
 	links = []
+	print(findLinks(news_source))
 	for link in findLinks(news_source):
 		name = export_to_telegraph.getTitle(link)
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
-			name = cleanFileName(name)
-			with open('html_result/%s.html' % name, 'w') as f:
+			fn = cleanFileName(name)
+			with open('html_result/%s.html' % fn, 'w') as f:
 				f.write(html)
-			links.append(name)
+			links.append((name, fn))
 			if len(links) > 10:
 				break
 
