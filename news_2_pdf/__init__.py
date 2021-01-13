@@ -30,7 +30,7 @@ def gen(news_source='bbc', ebook_convert_app=ebook_convert_app, additional_setti
 		name = export_to_telegraph.getTitle(link, **args)
 		html = getArticleHtml(name, link, filename + '.html')
 		if html:
-			fn = cleanFileName(name)
+			fn = cleanFileName(name)[:50]
 			with open('html_result/%s.html' % fn, 'w') as f:
 				f.write(html)
 			links.append((name, fn))
